@@ -6,6 +6,7 @@ function ValidateCpf(sentCpf) {
         }
     });
 }
+
 ValidateCpf.prototype.validate = function () {
     if (typeof this.cleanCpf === 'undefined') return false;
     if (this.cleanCpf.length !== 11) return false;
@@ -16,6 +17,7 @@ ValidateCpf.prototype.validate = function () {
     const newCpf = partialCpf + digit1 + digit2;
     return newCpf === this.cleanCpf;
 };
+
 ValidateCpf.prototype.createDigit = function (partialCpf) {
     const cpfArray = Array.from(partialCpf);
     let regressive = cpfArray.length + 1;
@@ -27,11 +29,14 @@ ValidateCpf.prototype.createDigit = function (partialCpf) {
     const digit = 11 - (total % 11);
     return digit > 9 ? '0' : String(digit);
 };
+
 ValidateCpf.prototype.isSequence = function() {
     const sequence = this.cleanCpf[0].repeat(this.cleanCpf.length);
     return sequence === this.cleanCpf;
 };
+
 const cpf = new ValidateCpf('070.987.720-03');
+
 if(cpf.validate()) {
     console.log('CPF is valid!');
 } else {
